@@ -4,7 +4,7 @@ Js 中的变量在内存中的储存形式是什么样的？
   
 
   
-
+[http://www.ruanyifeng.com/blog/2017/04/memory-leak.html](http://www.ruanyifeng.com/blog/2017/04/memory-leak.html)
   
 
 参考：https://juejin.im/post/5b10ba336fb9a01e66164346
@@ -101,5 +101,5 @@ JS 的内存回收有两种：引用计数垃圾回收、标记清除法
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTIyMTUxNzkyXX0=
+eyJoaXN0b3J5IjpbLTE4NzczNjU3NTEsNTIyMTUxNzkyXX0=
 -->
