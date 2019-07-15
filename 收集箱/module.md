@@ -1,6 +1,8 @@
 
 ## 浏览器加载
 
+参考：[http://es6.ruanyifeng.com/#docs/module-loader#%E5%BE%AA%E7%8E%AF%E5%8A%A0%E8%BD%BD](http://es6.ruanyifeng.com/#docs/module-loader#%E5%BE%AA%E7%8E%AF%E5%8A%A0%E8%BD%BD)
+
 ### 传统方法
 
 HTML 网页中，浏览器通过`<script>`标签加载 JavaScript 脚本。
@@ -867,5 +869,5 @@ System.import('app/es6-file').then(function(m) {
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTUwMzAyMTldfQ==
+eyJoaXN0b3J5IjpbMTU0ODUzNjgwOSwtMTU1NTAzMDIxOV19
 -->
