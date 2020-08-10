@@ -1,0 +1,27 @@
+{
+  "name": "documents",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "./node_modules/.bin/esdoc",
+    "build": "esdoc build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meiminjun/documents.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meiminjun/documents/issues"
+  },
+  "homepage": "https://github.com/meiminjun/documents#readme",
+  "devDependencies": {
+    "esdoc": "^1.1.0",
+    "esdoc-publish-html-plugin": "^1.1.2",
+    "esdoc-publish-markdown-plugin": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0"
+  }
+}
