@@ -7,7 +7,7 @@
 
 HTML 网页中，浏览器通过`<script>`标签加载 JavaScript 脚本。
 
-```
+```bash
 <!-- 页面内嵌的脚本 -->
 <script type="application/javascript">
   // module code
@@ -25,7 +25,7 @@ HTML 网页中，浏览器通过`<script>`标签加载 JavaScript 脚本。
 
 如果脚本体积很大，下载和执行的时间就会很长，因此造成浏览器堵塞，用户会感觉到浏览器“卡死”了，没有任何响应。这显然是很不好的体验，所以浏览器允许脚本异步加载，下面就是两种异步加载的语法。
 
-```
+```bash
 <script src="path/to/myModule.js" defer></script>
 <script src="path/to/myModule.js" async></script>
 
@@ -39,7 +39,7 @@ HTML 网页中，浏览器通过`<script>`标签加载 JavaScript 脚本。
 
 浏览器加载 ES6 模块，也使用`<script>`标签，但是要加入`type="module"`属性。
 
-```
+``` javascript
 <script type="module" src="./foo.js"></script>
 
 ```
@@ -48,7 +48,7 @@ HTML 网页中，浏览器通过`<script>`标签加载 JavaScript 脚本。
 
 浏览器对于带有`type="module"`的`<script>`，都是异步加载，不会造成堵塞浏览器，即等到整个页面渲染完，再执行模块脚本，等同于打开了`<script>`标签的`defer`属性。
 
-```
+```bash
 <script type="module" src="./foo.js"></script>
 <!-- 等同于 -->
 <script type="module" src="./foo.js" defer></script>
@@ -59,7 +59,7 @@ HTML 网页中，浏览器通过`<script>`标签加载 JavaScript 脚本。
 
 `<script>`标签的`async`属性也可以打开，这时只要加载完成，渲染引擎就会中断渲染立即执行。执行完成后，再恢复渲染。
 
-```
+``` javascript
 <script type="module" src="./foo.js" async></script>
 
 ```
@@ -68,7 +68,7 @@ HTML 网页中，浏览器通过`<script>`标签加载 JavaScript 脚本。
 
 ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全一致。
 
-```
+``` javascript
 <script type="module">
   import utils from "./utils.js";
 
@@ -291,7 +291,7 @@ Node 要求 ES6 模块采用`.mjs`后缀文件名。也就是说，只要脚本�
 目前，这项功能还在试验阶段。安装 Node v8.5.0 或以上版本，要用`--experimental-modules`参数才能打开该功能。
 
 ```bash
-$ node --experimental-modules my-app.mjs
+node --experimental-modules my-app.mjs
 
 ```
 
@@ -799,21 +799,21 @@ TypeError: even is not a function
 首先，安装这个转码器。
 
 ```bash
-$ npm install -g es6-module-transpiler
+npm install -g es6-module-transpiler
 
 ```
 
 然后，使用`compile-modules convert`命令，将 ES6 模块文件转码。
 
 ```bash
-$ compile-modules convert file1.js file2.js
+compile-modules convert file1.js file2.js
 
 ```
 
 `-o`参数可以指定转码后的文件名。
 
 ```bash
-$ compile-modules convert -o out.js file1.js
+compile-modules convert -o out.js file1.js
 
 ```
 
@@ -823,14 +823,14 @@ $ compile-modules convert -o out.js file1.js
 
 使用时，先在网页内载入`system.js`文件。
 
-```
+```bash
 <script src="system.js"></script>
 
 ```
 
 然后，使用`System.import`方法加载模块文件。
 
-```
+```bash
 <script>
   System.import('./app.js');
 </script>
@@ -854,7 +854,7 @@ export class q {
 
 然后，在网页内加载这个模块文件。
 
-```
+```javascript
 <script>
 
 System.import('app/es6-file').then(function(m) {

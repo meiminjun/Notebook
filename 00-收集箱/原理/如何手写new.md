@@ -10,7 +10,7 @@
 
 根据以上几个过程，我们也可以试着来自己实现一个  `new`
 
-```
+```javascript
 function create() {
   let obj = {}
   let Con = [].shift.call(arguments)
@@ -33,13 +33,10 @@ function create() {
 
 对于创建一个对象来说，更推荐使用字面量的方式创建对象（无论性能上还是可读性）。因为你使用  `new Object()`  的方式创建对象需要通过作用域链一层层找到  `Object`，但是你使用字面量的方式就没这个问题。
 
-```
+```javascript
 function Foo() {}
 // function 就是个语法糖
 // 内部等同于 new Function()
 let a = { b: 1 }
 // 这个字面量内部也是使用了 new Object()
 ```
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDIwOTIwMjZdfQ==
--->
