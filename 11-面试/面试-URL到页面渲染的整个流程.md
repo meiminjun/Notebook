@@ -49,6 +49,3 @@ CSSOM 树和 DOM 树构建完成后会开始生成 Render 树，这一步就是�
 总的来说这一章节就是带着大家从 DNS 查询开始到渲染出画面完整的了解一遍过程，将之前学习到的内容连接起来。
 
 当来这一过程远远不止这些内容，但是对于大部分人能答出这些内容已经很不错了，你如果想了解更加详细的过程，可以阅读这篇[文章](https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Falex%2Fwhat-happens-when)。
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwNTc1NjEyOF19
--->
