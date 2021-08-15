@@ -1,2 +1,4 @@
 node_modules
 .stackedit-trash
+.ipynb_checkpoints/
+.gitignore-checkpoint
