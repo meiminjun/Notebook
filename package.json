@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./node_modules/.bin/esdoc",
-    "build": "esdoc build"
+    "build": "esdoc build",
+    "serve": "docsify serve"
   },
   "repository": {
     "type": "git",
