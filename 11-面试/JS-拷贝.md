@@ -36,8 +36,6 @@ console.debug(aC)
 
 深拷贝：
 
-<!-- TODO -->
-
 // 利用JSON序列化实现一个深拷贝
 
 ```javascript
