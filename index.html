@@ -28,7 +28,7 @@
         return theRequest;
       }
       var queryObj = GetQuery();
-      var hideSidebar = queryObj.hidebar === "true";
+      var hideSidebar = queryObj.hidebar === "false" ? false : true;
       window.$docsify = {
         name: "Mr.Mei's Notebook",
         repo: "",
