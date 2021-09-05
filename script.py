@@ -12,12 +12,14 @@ os.system('jupyter nbconvert --to markdown */*.ipynb')
 files = glob.glob(r'./*/*.md')
 
 # print(files)
+home = """# [我的知识笔记](https://meiminjun.github.io/Notebook/#/)
+
+"""
 str = "- [首页](/)\n"
 list = [str]
 # tup = ()
 fie_name_list = []
 
-# TODO：做个名称排序
 for file in files:
     file_path = file[file.find('/')+1:]
     file_name = file[file.rfind('/')+1:file.rfind('.')]
@@ -38,6 +40,7 @@ for i in fie_name_list:
     file_path = i[1]
     # print(file_name)
     str += f"  - [{file_name}]({file_path})\n"
+    home += f"- [{file_name}]({file_path})\n"
 
     # str+= f
 
@@ -50,3 +53,6 @@ for i in fie_name_list:
 
 with open('_sidebar.md', 'w') as f:
     f.write(str)
+
+with open('README.md', 'w') as f:
+    f.write(home)
