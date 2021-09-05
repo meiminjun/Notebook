@@ -19,7 +19,7 @@ fie_name_list = []
 
 # TODO：做个名称排序
 for file in files:
-    file_path = file
+    file_path = file[file.find('/')+1:]
     file_name = file[file.rfind('/')+1:file.rfind('.')]
     tup = (file_name, file_path)
     fie_name_list.append(tup)
