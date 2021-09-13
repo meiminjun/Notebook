@@ -6,3 +6,5 @@ git reset --merge. 或者 git merge --abort
 
 git remote -v
 查看远程地址
+
+* git remote show // 查看远程

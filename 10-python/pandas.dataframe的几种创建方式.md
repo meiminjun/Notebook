@@ -1,0 +1,372 @@
+# dataframe的几种创建方式
+
+
+```python
+import pandas as pd
+```
+
+## 字典创建
+
+
+```python
+
+dic1 = {"name": ["小明", "小红", "小孙"],
+        "age": [20, 18, 27],
+        "sex": ["男", "女", "男"]
+        }
+pd.DataFrame(dic1)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>小明</td>
+      <td>20</td>
+      <td>男</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>小红</td>
+      <td>18</td>
+      <td>女</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>小孙</td>
+      <td>27</td>
+      <td>男</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+> 与下面的Series类似
+
+## 嵌套字典创建
+
+
+```python
+dic2 = {'数量': {'苹果': 3, '梨': 2, '草莓': 5},
+        '价格': {'苹果': 10, '梨': 9, '草莓': 8},
+        '产地': {'苹果': '陕西', '梨': '山东', '草莓': '广东'}
+        }
+pd.DataFrame(dic2)
+
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>数量</th>
+      <th>价格</th>
+      <th>产地</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>苹果</td>
+      <td>3</td>
+      <td>10</td>
+      <td>陕西</td>
+    </tr>
+    <tr>
+      <td>梨</td>
+      <td>2</td>
+      <td>9</td>
+      <td>山东</td>
+    </tr>
+    <tr>
+      <td>草莓</td>
+      <td>5</td>
+      <td>8</td>
+      <td>广东</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## 列表创建
+
+
+```python
+lst = ['小明','小红', '小黄']
+df1 = pd.DataFrame(lst, columns=["姓名"])
+print(df1)
+# 修改索引
+# df2 = pd.DataFrame(lst, columns=["姓名"], index=[1,2,3])
+# print(df2)
+```
+
+       姓名
+    0  小明
+    1  小红
+    2  小黄
+
+
+## 列表嵌套创建
+
+
+```python
+
+lst = [["小明", "20", "男"],
+       ["小红", "23", "女"],
+       ["小周", "19", "男"],
+       ["小孙", "28", "男"]
+       ]
+pd.DataFrame(lst, columns=["姓名", "年龄", "性别"])
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>年龄</th>
+      <th>性别</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>小明</td>
+      <td>20</td>
+      <td>男</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>小红</td>
+      <td>23</td>
+      <td>女</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>小周</td>
+      <td>19</td>
+      <td>男</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>小孙</td>
+      <td>28</td>
+      <td>男</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## 元组创建
+
+
+```python
+tup = ("小明", "小红", "小周", "小孙")
+df12 = pd.DataFrame(tup, columns=["姓名"])
+print(df12)
+```
+
+       姓名
+    0  小明
+    1  小红
+    2  小周
+    3  小孙
+
+
+
+```python
+tup2 = [("小孙", "男", "12", "1991-03-13"), ("小明", "男", "12", "1991-03-13"), ("小红", "男", "12", "1991-03-13")]
+pd.DataFrame(tup2, columns=["姓名", "性别", "年龄", "出生日期"])
+
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>年龄</th>
+      <th>出生日期</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>小孙</td>
+      <td>男</td>
+      <td>12</td>
+      <td>1991-03-13</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>小明</td>
+      <td>男</td>
+      <td>12</td>
+      <td>1991-03-13</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>小红</td>
+      <td>男</td>
+      <td>12</td>
+      <td>1991-03-13</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+> 这种方式与从mysql中提取创建方式类似，
+> 区别在于mysql 返回的是元组
+
+
+## 使用 Series 创建
+
+
+```python
+series = {'水果': pd.Series(['苹果', '梨', '草莓']),
+'数量': pd.Series([60, 50, 100]),
+'价格': pd.Series([7, 5, 18])}
+
+pd.DataFrame(series)
+
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>水果</th>
+      <th>数量</th>
+      <th>价格</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>苹果</td>
+      <td>60</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>梨</td>
+      <td>50</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>草莓</td>
+      <td>100</td>
+      <td>18</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## 参考文献
+
+`https://mp.weixin.qq.com/s?src=11&timestamp=1630639469&ver=3291&signature=2hP6UP*xyIiph4dVB7QKEtEbmKdsacG8sFuoIeSYBuRFZ*tDDJPxkb21KefUeBiw7chpJcCW-FnbOtMcfvdy*QpOpjHZzjK0yZFnTKiCPvpn4Cy3H2imaKiJna0nM2J3&new=1`
+
