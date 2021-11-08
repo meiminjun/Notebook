@@ -6,7 +6,7 @@ import glob
 import os
 
 # 执行命令
-os.system('jupyter nbconvert --to markdown *.ipynb')
+os.system('jupyter nbconvert --to markdown */*.ipynb')
 
 # 获取当前文件夹下的所有.md 文件
 files = glob.glob(r'./*/*.md')
