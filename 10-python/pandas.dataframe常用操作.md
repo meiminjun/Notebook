@@ -4,14 +4,28 @@
 ```python
 import pandas as pd
 
+df0 = pd.DataFrame({"x2": [
+                   11.2, 23.2, 23.4, 1], "x3": [11.2, 23.2, 23.4, 12]})
+
+print(df0)
+
 df1 = pd.DataFrame({'x1': ["a", "b", "c", "a"], "x2": [
                    "11.2", "23.2", "23.4", "1"], "x3": ["11.2", "23.2", "23.4", "12"]})
 print(df1)
 df2 = pd.DataFrame({'x1': ["a", "b", "d"], "x2": ["20.23", 'NaN', "90.4"]})
 print(df2)
+data = {'brand_model': ['德力西 GW912200', '埃帝尔 IB-207TPN-06231C02', '德力西 72LT3YFM40D', '科顺 2-3654-561 铆钉型'],
+        'cate': ['低压', '管阀', '低压', '搬运']}
+df3 = pd.DataFrame(data)
+print(df3)
 
 ```
 
+         x2    x3
+    0  11.2  11.2
+    1  23.2  23.2
+    2  23.4  23.4
+    3   1.0  12.0
       x1    x2    x3
     0  a  11.2  11.2
     1  b  23.2  23.2
@@ -21,6 +35,11 @@ print(df2)
     0  a  20.23
     1  b    NaN
     2  d   90.4
+                  brand_model cate
+    0            德力西 GW912200   低压
+    1  埃帝尔 IB-207TPN-06231C02   管阀
+    2         德力西 72LT3YFM40D   低压
+    3       科顺 2-3654-561 铆钉型   搬运
 
 
 
@@ -282,26 +301,42 @@ pd.merge(df1, df2, how='outer', on='x1')
 
 
 
-### concat拼接数据
+### concat拼接数据(类似append)
 
 
 ```python
 print(df1)
 
 print(df2)
+
+print('\n 列拼接\n')
+print(pd.concat([df1, df2], axis=1))
+
+print('\n 行拼接\n')
 pd.concat([df1, df2])
 
 ```
 
-      x1    x2    x3
-    0  a  11.2  11.2
-    1  b  23.2  23.2
-    2  c  23.4  23.4
-    3  a     1    12
+      x111222 x211222 x311222
+    0       a    11.2    11.2
+    1       b    23.2    23.2
+    2       c    23.4    23.4
+    3       a       1      12
       x1     x2
     0  a  20.23
     1  b    NaN
     2  d   90.4
+    
+     列拼接
+    
+      x111222 x211222 x311222   x1     x2
+    0       a    11.2    11.2    a  20.23
+    1       b    23.2    23.2    b    NaN
+    2       c    23.4    23.4    d   90.4
+    3       a       1      12  NaN    NaN
+    
+     行拼接
+    
 
 
 
@@ -325,9 +360,11 @@ pd.concat([df1, df2])
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>x111222</th>
+      <th>x211222</th>
+      <th>x311222</th>
       <th>x1</th>
       <th>x2</th>
-      <th>x3</th>
     </tr>
   </thead>
   <tbody>
@@ -336,42 +373,56 @@ pd.concat([df1, df2])
       <td>a</td>
       <td>11.2</td>
       <td>11.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
       <td>b</td>
       <td>23.2</td>
       <td>23.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
       <td>c</td>
       <td>23.4</td>
       <td>23.4</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
       <td>a</td>
       <td>1</td>
       <td>12</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>a</td>
       <td>20.23</td>
-      <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>b</td>
       <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>b</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>d</td>
       <td>90.4</td>
-      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -598,7 +649,7 @@ print(df1.drop([0], axis=1))
 
 ## 六、列的数据格式化操作
 
-1. 直接列操作
+### 1. 直接列操作
 
 
 ```python
@@ -630,20 +681,34 @@ def test(x):
   return f'{x}1'
 
 
+def test2(x):
+  return f'{x}2'
+
 df1.columns = df1.columns.map(test)
+print(df1)
+
+# 匿名函数
+df1.columns = df1.columns.map(lambda x: f'{x}222')
 print(df1)
 
 
 ```
 
-      x1    x2    x3
-    0  a  11.2  11.2
-    1  b  23.2  23.2
-    2  c  23.4  23.4
       x11   x21   x31
     0   a  11.2  11.2
     1   b  23.2  23.2
     2   c  23.4  23.4
+    3   a     1    12
+      x111  x211  x311
+    0    a  11.2  11.2
+    1    b  23.2  23.2
+    2    c  23.4  23.4
+    3    a     1    12
+      x111222 x211222 x311222
+    0       a    11.2    11.2
+    1       b    23.2    23.2
+    2       c    23.4    23.4
+    3       a       1      12
 
 
 
@@ -662,6 +727,90 @@ print(df1)
     0  NaN  11.2  11.2
     1  NaN  23.2  23.2
     2  NaN  23.4  23.4
+
+
+### 3. split 字符串拆分处理
+
+```
+split`(*self*, *pat=None*, *n=-1*, *expand=False*)
+pat：分列的依据，可以是空格，符号，字符串等等。
+n：分列的次数，不指定的话就会根据符号的个数全部分列。
+expand：为True可以直接将分列后的结果转换成DataFrame。
+如果想要从最右边开始分列，可以使用rsplit()，rsplit()和split()的用法类似，一个从右边开始，一个从左边开始。
+```
+
+
+```python
+print(df3)
+df4 = df3['brand_model'].str.split(' ', 1, expand=True)
+
+
+print('\n格式化后：\n')
+print(df4)
+
+print('\n 列拼接 \n')
+print(pd.concat([df3, df4], axis=1))
+
+```
+
+                  brand_model cate
+    0            德力西 GW912200   低压
+    1  埃帝尔 IB-207TPN-06231C02   管阀
+    2         德力西 72LT3YFM40D   低压
+    3       科顺 2-3654-561 铆钉型   搬运
+    
+    格式化后：
+    
+         0                   1
+    0  德力西            GW912200
+    1  埃帝尔  IB-207TPN-06231C02
+    2  德力西         72LT3YFM40D
+    3   科顺      2-3654-561 铆钉型
+    
+     列拼接 
+    
+                  brand_model cate    0                   1
+    0            德力西 GW912200   低压  德力西            GW912200
+    1  埃帝尔 IB-207TPN-06231C02   管阀  埃帝尔  IB-207TPN-06231C02
+    2         德力西 72LT3YFM40D   低压  德力西         72LT3YFM40D
+    3       科顺 2-3654-561 铆钉型   搬运   科顺      2-3654-561 铆钉型
+
+
+### 4. apply、applymap对表中的每一个元素更改
+
+
+```python
+print(df0)
+print('\n 格式化后\n')
+print(df0.apply(lambda x: x+1))
+
+print('\n applymap格式化后\n')
+
+print(df0.applymap(lambda x: x+2))
+
+```
+
+         x2    x3
+    0  11.2  11.2
+    1  23.2  23.2
+    2  23.4  23.4
+    3   1.0  12.0
+    
+     格式化后
+    
+         x2    x3
+    0  12.2  12.2
+    1  24.2  24.2
+    2  24.4  24.4
+    3   2.0  13.0
+    
+     applymap格式化后
+    
+         x2    x3
+    0  13.2  13.2
+    1  25.2  25.2
+    2  25.4  25.4
+    3   3.0  14.0
 
 
 ## 七、行、列名称更改
@@ -764,18 +913,21 @@ def test_map(x):
 # print(df1.index.map(test_map))
 # 输出 Index(['BEIJING_ABC', 'SHANGHAI_ABC', 'GUANGZHOU_ABC'], dtype='object')
 
-print(df1.rename(index=test_map))
+# print(df1.rename(index=test_map))
+print(df1.rename(index=lambda x: f'{x}%'))
 
 ```
 
-           0     1     2
-    x1     a     b     c
-    x2  11.2  23.2  23.4
-    x3  11.2  23.2  23.4
-               0     1     2
-    x1_ABC     a     b     c
-    x2_ABC  11.2  23.2  23.4
-    x3_ABC  11.2  23.2  23.4
+      x1    x2    x3
+    0  a  11.2  11.2
+    1  b  23.2  23.2
+    2  c  23.4  23.4
+    3  a     1    12
+       x1    x2    x3
+    0%  a  11.2  11.2
+    1%  b  23.2  23.2
+    2%  c  23.4  23.4
+    3%  a     1    12
 
 
 ## 八、去重
