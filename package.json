@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:markdown": "jupyter nbconvert --to markdown */*.ipynb",
     "build": "python script.py",
-    "dev": "python script.py && docsify serve"
+    "dev": "python script.py && node_modules/.bin/docsify serve"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,6 @@
   },
   "homepage": "https://github.com/meiminjun/documents#readme",
   "devDependencies": {
-    "esdoc": "^1.1.0",
-    "esdoc-publish-html-plugin": "^1.1.2",
-    "esdoc-publish-markdown-plugin": "^1.1.0",
-    "esdoc-standard-plugin": "^1.0.0"
+    "docsify-cli": "4.4.3"
   }
 }
