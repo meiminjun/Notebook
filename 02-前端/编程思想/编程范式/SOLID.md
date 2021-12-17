@@ -1,19 +1,19 @@
-Solid 开发原则
-===
+# Solid 开发原则
+
 参考：
 
-1. http://www.10tiao.com/html/788/201810/2247489713/1.html
-2. http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html
+1. <http://www.10tiao.com/html/788/201810/2247489713/1.html>
+2. <http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html>
 
 用来更好地进行面向对象编程，五大原则分别是：
 
-1.  The Single Responsibility Principle（单一职责SRP）：一个类或者方法只完成一种功能
-2.  The Open/Closed Principle（开闭原则OCP）: 一个类或者方法对内关闭，对外开放
-3.  The Liskov Substitution Principle（里氏替换原则LSP）：
-4.  The Interface Segregation Principle（接口分离原则ISP）
-5.  The Dependency Inversion Principle（依赖倒置原则DIP）
+1.  The Single Responsibility Principle（单一职责 SRP）：一个类或者方法只完成一种功能
+2.  The Open/Closed Principle（开闭原则 OCP）: 一个类或者方法对内关闭，对外开放
+3.  The Liskov Substitution Principle（里氏替换原则 LSP）：
+4.  The Interface Segregation Principle（接口分离原则 ISP）
+5.  The Dependency Inversion Principle（依赖倒置原则 DIP）
 
-## [单一职责SRP](http://www.cnblogs.com/TomXu/archive/2012/01/06/2305513.html)
+## [单一职责 SRP](http://www.cnblogs.com/TomXu/archive/2012/01/06/2305513.html)
 
 原文描述：类发生更改的原因应该只有一个
 
@@ -30,6 +30,7 @@ class Animal {
     saveAnimal(a: Animal) { }
 }
 ```
+
 上面的 Animal 就违反了单一职责原则（SRP）
 
 它为什么违反了 SRP？
@@ -42,14 +43,14 @@ SRP 指出，类应该有一个职责，在这里，我们可以得出两个职�
 
 为了使这个类符合 SRP，我们创建了另一个类，它负责将动物存储到数据库中这个单独的职责：
 
-```
+```javascript
 class Animal {
-    constructor(name: string){ }
-    getAnimalName() { }
+  constructor(name: string) {}
+  getAnimalName() {}
 }
 class AnimalDB {
-    getAnimal(a: Animal) { }
-    saveAnimal(a: Animal) { }
+  getAnimal(a: Animal) {}
+  saveAnimal(a: Animal) {}
 }
 ```
 
@@ -63,17 +64,16 @@ class AnimalDB {
 2.  Structurer – 该对象设计为维护对象和信息之间的关系
 3.  Service provider – 该对象设计为处理工作并提供服务给其它对象
 4.  Controller – 该对象设计为控制决策一系列负责的任务处理
-5.  Coordinator – 该对象不做任何决策处理工作，只是delegate工作到其它对象上
+5.  Coordinator – 该对象不做任何决策处理工作，只是 delegate 工作到其它对象上
 6.  Interfacer – 该对象设计为在系统的各个部分转化信息（或请求）
 
-
-## [开闭原则OCP](http://www.cnblogs.com/TomXu/archive/2012/01/09/2306329.html)
+## [开闭原则 OCP](http://www.cnblogs.com/TomXu/archive/2012/01/09/2306329.html)
 
 原文描述：软件实体（类，模块，方法等等）应当对扩展开放，对修改关闭，即软件实体应当在不修改的前提下扩展
 
-open for extension（对扩展开放）的意思是说当新需求出现的时候，可以通过扩展现有模型达到目的。而Close for modification（对修改关闭）的意思是说不允许对该实体做任何修改，说白了，就是这些需要执行多样行为的实体应该设计成不需要修改就可以实现各种的变化，坚持开闭原则有利于用最少的代码进行项目维护。
+open for extension（对扩展开放）的意思是说当新需求出现的时候，可以通过扩展现有模型达到目的。而 Close for modification（对修改关闭）的意思是说不允许对该实体做任何修改，说白了，就是这些需要执行多样行为的实体应该设计成不需要修改就可以实现各种的变化，坚持开闭原则有利于用最少的代码进行项目维护。
 
-英文原文：http://freshbrewedcode.com/derekgreer/2011/12/19/solid-javascript-the-openclosed-principle/
+英文原文：<http://freshbrewedcode.com/derekgreer/2011/12/19/solid-javascript-the-openclosed-principle/>
 
 让我们继续以 Animal 类为例。
 
@@ -86,7 +86,7 @@ class Animal {
 
 我们希望遍历一个动物列表，发出它们的声音。
 
-```
+```javacript
 //...
 const animals: Array<Animal> = [
     new Animal('lion'),
@@ -222,9 +222,9 @@ class SuperVIPDiscount: VIPDiscount {
 
 就是这样，扩展而不修改。
 
-## [里氏替换原则LSP](http://www.cnblogs.com/TomXu/archive/2012/01/10/2310244.html)
+## [里氏替换原则 LSP](http://www.cnblogs.com/TomXu/archive/2012/01/10/2310244.html)
 
-原文描述：Subtypes must be substitutable for their base types.  
+原文描述：Subtypes must be substitutable for their base types.
 派生类型必须可以替换它的基类型。
 
 简单描述：子类必须可以替换它的超类。
@@ -278,10 +278,9 @@ AnimalLegCount(animals);
 
 为了使这个函数符合 LSP 原则，我们将遵循 Steve Fenton 提出的 LSP 要求：
 
--   如果超类（Animal）有一个方法接受超类类型（Anima）的参数，那么它的子类（Pigeon）应该接受超类类型（Animal 类型）或子类类型（Pigeon 类型）作为参数。
-    
--   如果超类返回一个超类类型（Animal）, 那么它的子类应该返回一个超类类型（Animal 类型）或子类类型（Pigeon 类型）。
-    
+- 如果超类（Animal）有一个方法接受超类类型（Anima）的参数，那么它的子类（Pigeon）应该接受超类类型（Animal 类型）或子类类型（Pigeon 类型）作为参数。
+
+- 如果超类返回一个超类类型（Animal）, 那么它的子类应该返回一个超类类型（Animal 类型）或子类类型（Pigeon 类型）。
 
 现在，我们可以重新实现 AnimalLegCount 函数了：
 
@@ -322,16 +321,16 @@ class Lion extends Animal{
 
 如你所见，AnimalLegCount 不需要知道动物的类型就可以返回它的腿数，它只调用了 Animal 类型的 LegCount 方法，因为根据约定，Animal 类的一个子类必须实现 LegCount 函数。
 
-## [接口隔离原则ISP](http://www.cnblogs.com/TomXu/archive/2012/02/14/2330137.html)
+## [接口隔离原则 ISP](http://www.cnblogs.com/TomXu/archive/2012/02/14/2330137.html)
 
-原文描述：Clients should not be forced to depend on methods they do not use.  
+原文描述：Clients should not be forced to depend on methods they do not use.
 不应该强迫客户依赖于它们不用的方法
 
 简单描述：创建特定于客户端的细粒度接口。不应该强迫客户端依赖于它们不使用的接口
 
 当用户依赖的接口方法即便只被别的用户使用而自己不用，那它也得实现这些接口，换而言之，一个用户依赖了未使用但被其他用户使用的接口，当其他用户修改该接口时，依赖该接口的所有用户都将受到影响。这显然违反了开闭原则，也不是我们所期望的。
 
-接口隔离原则ISP和单一职责有点类似，都是用于聚集功能职责的，实际上ISP可以被理解才具有单一职责的程序转化到一个具有公共接口的对象
+接口隔离原则 ISP 和单一职责有点类似，都是用于聚集功能职责的，实际上 ISP 可以被理解才具有单一职责的程序转化到一个具有公共接口的对象
 
 这个原则是为了克服实现大接口的缺点。让我们看看下面的 IShape 接口：
 
@@ -355,7 +354,7 @@ class Circle implements IShape {
     }
     drawRectangle(){
         //...
-    }    
+    }
 }
 class Square implements IShape {
     drawCircle(){
@@ -366,7 +365,7 @@ class Square implements IShape {
     }
     drawRectangle(){
         //...
-    }    
+    }
 }
 class Rectangle implements IShape {
     drawCircle(){
@@ -377,7 +376,7 @@ class Rectangle implements IShape {
     }
     drawRectangle(){
         //...
-    }    
+    }
 }
 ```
 
@@ -431,7 +430,7 @@ class Square implements ISquare {
 class Rectangle implements IRectangle {
     drawRectangle() {
         //...
-    }    
+    }
 }
 class Triangle implements ITriangle {
     drawTriangle() {
@@ -472,20 +471,19 @@ class Rectangle implements IShape {
     draw(){
         //...
     }
-}                                            
+}
 ```
 
 然后，我们可以使用 I- 接口创建具体的形状，如半圆、直角三角形、等边三角形、钝边矩形等。
 
-## [依赖倒置原则DIP](http://www.cnblogs.com/TomXu/archive/2012/02/15/2330143.html)
+## [依赖倒置原则 DIP](http://www.cnblogs.com/TomXu/archive/2012/02/15/2330143.html)
 
 依赖倒置原则的描述：
-A. High-level modules should not depend on low-level modules.  Both should depend on abstractions.  
- 高级模块不应该依赖于低级模块，二者都应该依赖于抽象  
-  
-B. Abstractions should not depend upon details.  Details should depend upon abstractions.  
- 抽象不应该依赖于细节，细节应该依赖于抽象
+A. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+高级模块不应该依赖于低级模块，二者都应该依赖于抽象
 
+B. Abstractions should not depend upon details. Details should depend upon abstractions.
+抽象不应该依赖于细节，细节应该依赖于抽象
 
 在软件开发中，我们的应用程序最终主要是由模块组成。当这种情况出现时，我们必须使用依赖注入来解决。高级组件依赖于低级组件发挥作用。
 
@@ -556,7 +554,7 @@ class NodeHttpService implements Connection {
 class MockHttpService implements Connection {
     request(url: string, opts:any) {
         //...
-    }    
+    }
 }
 ```
 
@@ -570,7 +568,7 @@ class MockHttpService implements Connection {
 
 ### 2、开闭原则（Open Closed Principle，OCP）
 
-此原则是由Bertrand Meyer提出的。原文是：“Software entities should be open for extension,but closed for modification”。
+此原则是由 Bertrand Meyer 提出的。原文是：“Software entities should be open for extension,but closed for modification”。
 
 模块应**对扩展开放，而对修改关闭**。模块应尽量在不修改原来的代码的情况下进行扩展。
 
@@ -578,7 +576,7 @@ class MockHttpService implements Connection {
 
 ### 3、里氏代换原则（Liskov Substitution Principle，LSP）
 
-里氏代换原则是由Barbara Liskov提出的。可以描述为：**子类继承于父类，可以单独调用，如果调用的是父类的话，那么换成子类也完全可以运行。**从开闭原则可以看出，设计模式一个重要的部分是抽象化，里氏代换原则从另一个角度描述了抽象（父类）和具体（子类）之间的关系。举例，猫科动物可以完成捕猎这个动作，而老虎也可以完成捕猎，在这个例子中，猫科动物就是父类，老虎是继承于猫科动物、从猫科动物这个类扩展出来的子类。
+里氏代换原则是由 Barbara Liskov 提出的。可以描述为：**子类继承于父类，可以单独调用，如果调用的是父类的话，那么换成子类也完全可以运行。**从开闭原则可以看出，设计模式一个重要的部分是抽象化，里氏代换原则从另一个角度描述了抽象（父类）和具体（子类）之间的关系。举例，猫科动物可以完成捕猎这个动作，而老虎也可以完成捕猎，在这个例子中，猫科动物就是父类，老虎是继承于猫科动物、从猫科动物这个类扩展出来的子类。
 
 可以说：**里氏代换原则是继承复用的一个基础。**
 
