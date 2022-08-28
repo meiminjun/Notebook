@@ -68,6 +68,118 @@ pd.DataFrame(dic1)
 
 
 
+## json 创建
+
+
+```python
+json_arr = [
+  {
+  "name": "京基智农",
+  "no": "000048",
+  "url": "http://stock.jrj.com.cn/share,000048.shtml",
+  "price": 17.7,
+  "up_or_down": "-0.39%",
+  "num_ratio": 0.76,
+  "change_ratio": "0.08%",
+  "pe": 8.6
+  },
+  {
+  "name": "广弘控股",
+  "no": "000529",
+  "url": "http://stock.jrj.com.cn/share,000529.shtml",
+  "price": 6.34,
+  "up_or_down": "0.32%",
+  "num_ratio": 1.64,
+  "change_ratio": "0.45%",
+  "pe": 12.24
+  },
+  {
+  "name": "龙大美食",
+  "no": "002726",
+  "url": "http://stock.jrj.com.cn/share,002726.shtml",
+  "price": 10.95,
+  "up_or_down": "2.05%",
+  "num_ratio": 1.37,
+  "change_ratio": "0.8%",
+  "pe": 19.07
+  }
+]
+
+pd.DataFrame(json_arr)
+
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>no</th>
+      <th>url</th>
+      <th>price</th>
+      <th>up_or_down</th>
+      <th>num_ratio</th>
+      <th>change_ratio</th>
+      <th>pe</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>京基智农</td>
+      <td>000048</td>
+      <td>http://stock.jrj.com.cn/share,000048.shtml</td>
+      <td>17.70</td>
+      <td>-0.39%</td>
+      <td>0.76</td>
+      <td>0.08%</td>
+      <td>8.60</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>广弘控股</td>
+      <td>000529</td>
+      <td>http://stock.jrj.com.cn/share,000529.shtml</td>
+      <td>6.34</td>
+      <td>0.32%</td>
+      <td>1.64</td>
+      <td>0.45%</td>
+      <td>12.24</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>龙大美食</td>
+      <td>002726</td>
+      <td>http://stock.jrj.com.cn/share,002726.shtml</td>
+      <td>10.95</td>
+      <td>2.05%</td>
+      <td>1.37</td>
+      <td>0.8%</td>
+      <td>19.07</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 > 与下面的Series类似
 
 ## 嵌套字典创建

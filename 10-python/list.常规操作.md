@@ -26,3 +26,17 @@ print(a)
     True
 
 
+
+## 批量替换操作
+
+
+```python
+import re
+arr = ['猪肉概念股', '牛肉概念股', '特斯拉概念股']
+result = list(map(lambda x: re.sub('概念股', '', x),arr))
+print(result)
+
+```
+
+    ['猪肉', '牛肉', '特斯拉']
+

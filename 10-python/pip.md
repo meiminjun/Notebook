@@ -12,3 +12,13 @@
 
 > pip install -r requirements.txt
 
+
+
+```python
+[a, b]  = { "a": '123', "b": 23 }
+
+print(a)
+```
+
+    a
+

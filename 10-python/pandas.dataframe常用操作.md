@@ -14,6 +14,7 @@ df1 = pd.DataFrame({'x1': ["a", "b", "c", "a"], "x2": [
 print(df1)
 df2 = pd.DataFrame({'x1': ["a", "b", "d"], "x2": ["20.23", 'NaN', "90.4"]})
 print(df2)
+
 data = {'brand_model': ['德力西 GW912200', '埃帝尔 IB-207TPN-06231C02', '德力西 72LT3YFM40D', '科顺 2-3654-561 铆钉型'],
         'cate': ['低压', '管阀', '低压', '搬运']}
 df3 = pd.DataFrame(data)
@@ -50,19 +51,20 @@ print(df1.loc[:, 'x1'])
 va1 = df1.loc[:, 'x2'].tolist()[-1]
 va2 = df1.loc[:, 'x3'].tolist()[-1]
 
-# va3 = va1 - va2
-# print(va3)
-# print(va2)
-
+va3 = va1 - va2
+print(va3)
+print(va2)
 ```
 
       x1    x2    x3
     0  a  11.2  11.2
     1  b  23.2  23.2
     2  c  23.4  23.4
+    3  a     1    12
     0    a
     1    b
     2    c
+    3    a
     Name: x1, dtype: object
 
 
@@ -71,12 +73,12 @@ va2 = df1.loc[:, 'x3'].tolist()[-1]
 
     TypeError                                 Traceback (most recent call last)
 
-    /var/folders/vh/4zv6yqys5w7dry2wxbzxkkvxf0lzcv/T/ipykernel_36514/1791069689.py in <module>
+    /var/folders/w6/9k4dzqlj617f06dfby_vk1pr0000gn/T/ipykernel_13699/4084052124.py in <module>
           5 va2 = df1.loc[:, 'x3'].tolist()[-1]
           6 
     ----> 7 va3 = va1 - va2
           8 print(va3)
-          9 # print(va2)
+          9 print(va2)
 
 
     TypeError: unsupported operand type(s) for -: 'str' and 'str'
@@ -107,12 +109,14 @@ print(list(df1.index))  # ['ll', 'll', 'mm']
     a  11.2  11.2
     b  23.2  23.2
     c  23.4  23.4
+    a  12       1
        x1    x2    x3
     x1               
     a   a  11.2  11.2
     b   b  23.2  23.2
     c   c  23.4  23.4
-    [0, 1, 2]
+    a   a     1    12
+    [0, 1, 2, 3]
 
 
 ### 2、 初始设置索引
@@ -494,20 +498,25 @@ print('\n获取多列\n')
 print(df1[['x1','x3']])
 ```
 
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    /var/folders/vh/4zv6yqys5w7dry2wxbzxkkvxf0lzcv/T/ipykernel_36514/533886085.py in <module>
-    ----> 1 print(df1)
-          2 
-          3 print('获取单列')
-          4 print(df1['x1'])
-          5 
-
-
-    NameError: name 'df1' is not defined
+      x1    x2    x3
+    0  a  11.2  11.2
+    1  b  23.2  23.2
+    2  c  23.4  23.4
+    3  a     1    12
+    获取单列
+    0    a
+    1    b
+    2    c
+    3    a
+    Name: x1, dtype: object
+    
+    获取多列
+    
+      x1    x3
+    0  a  11.2
+    1  b  23.2
+    2  c  23.4
+    3  a    12
 
 
 方式二： 按索引
