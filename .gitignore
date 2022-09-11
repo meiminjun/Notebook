@@ -5,3 +5,4 @@ node_modules
 *.pdf
 dist
 __pycache__
+10-python/东方财富/senta_bilstm
