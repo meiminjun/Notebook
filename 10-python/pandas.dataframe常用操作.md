@@ -20,6 +20,16 @@ data = {'brand_model': ['德力西 GW912200', '埃帝尔 IB-207TPN-06231C02', '�
 df3 = pd.DataFrame(data)
 print(df3)
 
+df5 = pd.DataFrame({'x1': ["12", "23", "99", "123"], "x2": [
+                   "11.2", "23.2", "23.4", "1"], "x3": ["11.2", "23.2", "23.4", "12"]})
+print(df5)
+df6 = pd.DataFrame({'x1': ["12%", "23", "99", "123"], "x2": [
+                   "11.2", "23.2%", "23.4", "1"], "x3": ["11.2", "23.2%", "23.4%", "12%"]})
+
+# 判断dataframe数据为空
+df7 = pd.DataFrame(data=[], columns=[1,2])
+print(df7.empty)
+
 ```
 
          x2    x3
@@ -41,6 +51,12 @@ print(df3)
     1  埃帝尔 IB-207TPN-06231C02   管阀
     2         德力西 72LT3YFM40D   低压
     3       科顺 2-3654-561 铆钉型   搬运
+        x1    x2    x3
+    0   12  11.2  11.2
+    1   23  23.2  23.2
+    2   99  23.4  23.4
+    3  123     1    12
+    True
 
 
 
@@ -785,7 +801,7 @@ print(pd.concat([df3, df4], axis=1))
     3       科顺 2-3654-561 铆钉型   搬运   科顺      2-3654-561 铆钉型
 
 
-### 4. apply、applymap对表中的每一个元素更改
+### 4. apply、applymap批量更改
 
 
 ```python
@@ -796,7 +812,11 @@ print(df0.apply(lambda x: x+1))
 print('\n applymap格式化后\n')
 
 print(df0.applymap(lambda x: x+2))
-
+# 过滤将包含-改为0
+df3_0 = df3.applymap(lambda x: 0 if '-' in x else x)
+print(df3_0)
+# 沿着列轴求和
+df0[["x2"]].apply(sum, axis=0)
 ```
 
          x2    x3
@@ -820,11 +840,206 @@ print(df0.applymap(lambda x: x+2))
     1  25.2  25.2
     2  25.4  25.4
     3   3.0  14.0
+           brand_model cate
+    0     德力西 GW912200   低压
+    1                0   管阀
+    2  德力西 72LT3YFM40D   低压
+    3                0   搬运
 
+
+
+
+
+    x2    58.8
+    dtype: float64
+
+
+
+### 5、类型转换
+
+> 股票代码的补位，例如000123，转成csv或者excel 时，变变成123
+
+```
+df['正股代码']  = df['正股代码'].str.zfill(6) #用的时候必须加上.str前缀
+
+<!-- 有时候似乎有问题 -->
+df['正股代码'] = df['正股代码'].astype('str') #将原本的int数据类型转换为文本
+
+df.to_csv('./test.csv', dtype = object)
+
+```
+
+### 6、变更类型
+
+
+```python
+dfx4 = pd.DataFrame([['11', '1.2', '3'], ['22', '4.8', '5']], columns=['a', 'b', 'c'])
+
+# dfx4['a'].str.replace('万','').astype('int')
+dfx4['b'].astype('int')
+dfx4['b'].dtypes
+# dfx4['b']
+```
+
+
+    ---------------------------------------------------------------------------
+
+    ValueError                                Traceback (most recent call last)
+
+    /var/folders/w6/9k4dzqlj617f06dfby_vk1pr0000gn/T/ipykernel_14591/716864053.py in <module>
+          2 
+          3 # dfx4['a'].str.replace('万','').astype('int')
+    ----> 4 dfx4['b'].astype('int')
+          5 dfx4['b'].dtypes
+          6 # dfx4['b']
+
+
+    /usr/local/anaconda3/envs/py39/lib/python3.9/site-packages/pandas/core/generic.py in astype(self, dtype, copy, errors)
+       5813         else:
+       5814             # else, only a single dtype is given
+    -> 5815             new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+       5816             return self._constructor(new_data).__finalize__(self, method="astype")
+       5817 
+
+
+    /usr/local/anaconda3/envs/py39/lib/python3.9/site-packages/pandas/core/internals/managers.py in astype(self, dtype, copy, errors)
+        416 
+        417     def astype(self: T, dtype, copy: bool = False, errors: str = "raise") -> T:
+    --> 418         return self.apply("astype", dtype=dtype, copy=copy, errors=errors)
+        419 
+        420     def convert(
+
+
+    /usr/local/anaconda3/envs/py39/lib/python3.9/site-packages/pandas/core/internals/managers.py in apply(self, f, align_keys, ignore_failures, **kwargs)
+        325                     applied = b.apply(f, **kwargs)
+        326                 else:
+    --> 327                     applied = getattr(b, f)(**kwargs)
+        328             except (TypeError, NotImplementedError):
+        329                 if not ignore_failures:
+
+
+    /usr/local/anaconda3/envs/py39/lib/python3.9/site-packages/pandas/core/internals/blocks.py in astype(self, dtype, copy, errors)
+        589         values = self.values
+        590 
+    --> 591         new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+        592 
+        593         new_values = maybe_coerce_values(new_values)
+
+
+    /usr/local/anaconda3/envs/py39/lib/python3.9/site-packages/pandas/core/dtypes/cast.py in astype_array_safe(values, dtype, copy, errors)
+       1307 
+       1308     try:
+    -> 1309         new_values = astype_array(values, dtype, copy=copy)
+       1310     except (ValueError, TypeError):
+       1311         # e.g. astype_nansafe can fail on object-dtype of strings
+
+
+    /usr/local/anaconda3/envs/py39/lib/python3.9/site-packages/pandas/core/dtypes/cast.py in astype_array(values, dtype, copy)
+       1255 
+       1256     else:
+    -> 1257         values = astype_nansafe(values, dtype, copy=copy)
+       1258 
+       1259     # in pandas we don't store numpy str dtypes, so convert to object
+
+
+    /usr/local/anaconda3/envs/py39/lib/python3.9/site-packages/pandas/core/dtypes/cast.py in astype_nansafe(arr, dtype, copy, skipna)
+       1172         # work around NumPy brokenness, #1987
+       1173         if np.issubdtype(dtype.type, np.integer):
+    -> 1174             return lib.astype_intsafe(arr, dtype)
+       1175 
+       1176         # if we have a datetime/timedelta array of objects
+
+
+    /usr/local/anaconda3/envs/py39/lib/python3.9/site-packages/pandas/_libs/lib.pyx in pandas._libs.lib.astype_intsafe()
+
+
+    ValueError: invalid literal for int() with base 10: '1.2'
+
+
+
+```python
+dfx3 = pd.DataFrame([['11', '1.2', '3'], ['22', '4.8', '5']], columns=['a', 'b', 'c'])
+print(dfx3)
+# pd.to_numeric()自动转换成float类型
+print(dfx3.apply(pd.to_numeric, errors='ignore', downcast='float'))
+print(dfx3.dtypes)
+# 遍历的方式格式转换
+dfx3.applymap(lambda x: float(x))
+# print(dfx3['a'].dtypes)
+
+
+# df['a'].str.replace('万','').astype('float')
+```
+
+        a    b  c
+    0  11  1.2  3
+    1  22  4.8  5
+          a    b    c
+    0  11.0  1.2  3.0
+    1  22.0  4.8  5.0
+    a    object
+    b    object
+    c    object
+    dtype: object
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11.0</td>
+      <td>1.2</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>22.0</td>
+      <td>4.8</td>
+      <td>5.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+### 7、查看列类型
+
+
+```python
+print(dfx3['a'].dtypes)
+```
 
 ## 七、行、列名称更改
 
 ### 1. 单独更改
+
+> 不会更改源数据，要重新赋值
 
 
 ```python
@@ -925,6 +1140,9 @@ def test_map(x):
 # print(df1.rename(index=test_map))
 print(df1.rename(index=lambda x: f'{x}%'))
 
+# print(df1['x1'].map(lambda x: f'{x}%'))
+# df1['x1'] = df1['x1'].map(lambda x: f'{x}%')
+# print(df1)
 ```
 
       x1    x2    x3
@@ -937,6 +1155,33 @@ print(df1.rename(index=lambda x: f'{x}%'))
     1%  b  23.2  23.2
     2%  c  23.4  23.4
     3%  a     1    12
+       x1    x2    x3
+    0  a%  11.2  11.2
+    1  b%  23.2  23.2
+    2  c%  23.4  23.4
+    3  a%     1    12
+
+
+## 批量去除%,并转化为float类型（排序）
+
+
+
+```python
+print(df6)
+df6_out = df6.applymap(lambda x: x if not x.endswith('%') else float(x.replace('%', '')))
+print(df6_out)
+```
+
+        x1     x2     x3
+    0  12%   11.2   11.2
+    1   23  23.2%  23.2%
+    2   99   23.4  23.4%
+    3  123      1    12%
+         x1    x2    x3
+    0  12.0  11.2  11.2
+    1    23  23.2  23.2
+    2    99  23.4  23.4
+    3   123     1  12.0
 
 
 ## 八、去重
@@ -1014,4 +1259,155 @@ print(df1.cumsum(axis=1))
     1  b  b23.2  b23.223.2
     2  c  c23.4  c23.423.4
     3  a     a1       a112
+
+
+## 十、排序
+
+
+```python
+print(df5)
+# 先转化成number
+df5['x1'] = df5['x1'].map(lambda x: float(x))
+df5.sort_values(by='x1') # 默认升序
+```
+
+          x1    x2    x3
+    0   12.0  11.2  11.2
+    1   23.0  23.2  23.2
+    2   99.0  23.4  23.4
+    3  123.0     1    12
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x1</th>
+      <th>x2</th>
+      <th>x3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12.0</td>
+      <td>11.2</td>
+      <td>11.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>23.0</td>
+      <td>23.2</td>
+      <td>23.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>99.0</td>
+      <td>23.4</td>
+      <td>23.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>123.0</td>
+      <td>1</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## 删除指定条件的行
+
+
+```python
+print(df5)
+# 先转成数字类型
+df5= df5.applymap(lambda x: float(x))
+# 删除x1列大于20的第一行
+print(df5.drop(index=df5[df5['x1'] > 20].index[0]))
+# 删除x1列大于20的所有行
+print(df5.drop(index=df5[df5['x1'] > 20].index))
+```
+
+          x1    x2    x3
+    0   12.0  11.2  11.2
+    1   23.0  23.2  23.2
+    2   99.0  23.4  23.4
+    3  123.0   1.0  12.0
+          x1    x2    x3
+    0   12.0  11.2  11.2
+    2   99.0  23.4  23.4
+    3  123.0   1.0  12.0
+         x1    x2    x3
+    0  12.0  11.2  11.2
+
+
+## dataframe to json
+
+
+```python
+print(df5)
+
+df5.to_json(orient='table')
+
+```
+
+        x1    x2    x3
+    0   12  11.2  11.2
+    1   23  23.2  23.2
+    2   99  23.4  23.4
+    3  123     1    12
+
+
+
+
+
+    '{"schema":{"fields":[{"name":"index","type":"integer"},{"name":"x1","type":"string"},{"name":"x2","type":"string"},{"name":"x3","type":"string"}],"primaryKey":["index"],"pandas_version":"0.20.0"},"data":[{"index":0,"x1":"12","x2":"11.2","x3":"11.2"},{"index":1,"x1":"23","x2":"23.2","x3":"23.2"},{"index":2,"x1":"99","x2":"23.4","x3":"23.4"},{"index":3,"x1":"123","x2":"1","x3":"12"}]}'
+
+
+
+## 格式化
+
+### 转换成数字类型
+
+
+```python
+print(df1)
+# print(df1['x2'])
+df1['x2'] = df1['x2'].apply(pd.to_numeric)
+# df = df.apply(pd.to_numeric, errors='ignore', downcast='float')
+print('格式化')
+print(df1['x2'])
+```
+
+      x1    x2    x3
+    0  a  11.2  11.2
+    1  b  23.2  23.2
+    2  c  23.4  23.4
+    3  a   1.0    12
+    格式化
+    0    11.2
+    1    23.2
+    2    23.4
+    3     1.0
+    Name: x2, dtype: float64
 
