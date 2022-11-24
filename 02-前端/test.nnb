@@ -1,0 +1,11 @@
+{
+    "cells": [
+        {
+            "language": "typescript",
+            "source": [
+                "var a = '123'\n\nconsole.log(a)"
+            ],
+            "outputs": []
+        }
+    ]
+}
