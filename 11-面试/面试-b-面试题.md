@@ -10,7 +10,7 @@
 
 4.  如果构造函数中没有返回其它对象，那么返回 this，即创建的这个的新对象，否则，返回构造函数中返回的对象。
 
-![](https://ws3.sinaimg.cn/large/006tNc79gy1g4m8gnd4i1j30gg07mad4.jpg)
+![11](https://ws3.sinaimg.cn/large/006tNc79gy1g4m8gnd4i1j30gg07mad4.jpg)
 
 ### 2. 如何正确判断 this 的指向？
 
@@ -264,7 +264,7 @@ Formatting Context 有 BFC (Block formatting context)，IFC (Inline formatting c
 
 ES5 有 6 种方式可以实现继承，分别为：
 
-##### 1. 原型链继承
+#### 1. 原型链继承
 
 原型链继承的基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。
 
@@ -386,11 +386,11 @@ ECMAScript5 通过新增 `Object.create()`方法规范了原型式继承。这�
 
 > 完全隐藏
 
-##### 1. `display` 属性
+#### 1. `display` 属性
 
 1.  `display: none;`
 
-##### 2.hidden 属性
+#### 2.hidden 属性
 
 HTML5 新增属性，相当于 `display:none`
 
@@ -672,7 +672,7 @@ fn2 作用域链 = [fn2 作用域, fn1 作用域，全局作用域]
 
 ### 15. 什么是闭包？闭包的作用是什么？
 
-##### 闭包的定义
+#### 闭包的定义
 
 《JavaScript 高级程序设计》:
 
