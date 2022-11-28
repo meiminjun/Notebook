@@ -18,7 +18,7 @@
 - [dataframe.excel.格式化](10-python/dataframe.excel.格式化.md)
 - [datetime.常见操作](10-python/datetime.常见操作.md)
 - [docker](04-工具/docker.md)
-- [git](04-工具/git.md)
+- [git.常用操作](04-工具/git.常用操作.md)
 - [https](04-工具/https.md)
 - [jinja.邮件报告](10-python/jinja.邮件报告.md)
 - [js.ast](02-前端/js.ast.md)
