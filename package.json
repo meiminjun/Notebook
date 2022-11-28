@@ -7,7 +7,7 @@
     "build:markdown": "jupyter nbconvert --to markdown */*.ipynb",
     "build": "python script.py",
     "dev": "python script.py && node_modules/.bin/docsify serve",
-    "upload": "git push all"
+    "publish": "npm run build && git add . && git commit -m \"update\" && git push all"
   },
   "repository": {
     "type": "git",
