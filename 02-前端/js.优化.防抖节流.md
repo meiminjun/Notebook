@@ -1,0 +1,58 @@
+# 防抖和节流？
+
+### 1.应用场景：
+
+> js的一些事件：如keyup、onresize、scroll、mousemove、mousehover等；还有类似于：手抖、手滑、手误、服务器没有响应或者响应慢等的重复点击操作。
+
+### 2.共同点：
+
+均是用来控制某个函数在一定时间内执行多少次的技巧。两种方法都是用来提高前端性能，减轻浏览器压力。
+
+### 3.区别：
+
+#### 3.1 什么是防抖(debounce)？
+
+> 延时处理，在事件被触发N秒后再执行回调，如果在这N秒内又被触发，则重新开始计时。
+
+```
+window.addEventListener('resize',function(e){
+    var t;
+    return function(){
+        if(t) clearTimeout(t);
+        t = setTimeout(function(){
+            // do something...
+        },500);
+    }
+}());
+复制代码
+```
+
+#### 3.2 什么是节流(throttle)？
+
+> 让一个函数无法在很短时间内连续调用，当上一次函数过了规定的这个时间段后，才能进行下一次该函数的调用。
+
+```
+function throttle(func, waitTime) {
+    var timeout,
+        previous = 0;
+    return function() {
+        context = this;
+        args = arguments;
+        if (!timeout) {
+            timeout = setTimeout(function(){
+                timeout = null;
+                func.apply(context, args)
+            }, waitTime)
+        }
+    }
+}
+```
+
+### 4.文字举例：
+
+A同学从B地到C地，**防抖**就相当于A同学坐公交车（乘客源源不断的刷卡上车，直到司机看见无人刷卡后，才会发车，即一段时间内，回调函数只会调用一次，即触发事件的最后一次）；**节流**就相当于A同学坐地铁（在规定的停车，在规定的时间发车，即在一段时间内，会每隔一段时间调用一次）。
+
+### 5.结语：
+
+不足之处，再接再厉！
+
