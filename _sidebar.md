@@ -21,6 +21,7 @@
   - [js.优化.防抖节流](02-前端/js.优化.防抖节流.md)
   - [js.内存](11-面试/js.内存.md)
   - [js.拷贝](11-面试/js.拷贝.md)
+  - [js.正则](02-前端/js.正则.md)
   - [jupyter-安装](04-工具/jupyter-安装.md)
   - [jupyter-快捷键](04-工具/jupyter-快捷键.md)
   - [jupyter.常见命令](10-python/jupyter.常见命令.md)
